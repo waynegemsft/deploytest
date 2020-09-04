@@ -7,7 +7,7 @@
 			"metadata": {
 				"description": "Specifies the name of the Azure Machine Learning workspace which will hold this datastore target."
 			},
-			"defaultValue": "wgmmstest001"
+			"defaultValue": "wgmmstest"
 		},
 		"codejobName": {
 			"type": "string",
