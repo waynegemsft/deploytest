@@ -36,7 +36,7 @@
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
-				"scriptContent": "wget https://raw.githubusercontent.com/waynegetest/deploytest/dev/waynege/dev/BertLarge/Code/train.py; az storage blob upload -f train.py -c test --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n wgblob",
+				"scriptContent": "wget https://raw.githubusercontent.com/waynegetest/deploytest/dev/waynege/dev/BertLarge/Code/train.py; az storage blob upload -f train.py -c test/customerpath/cds --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n wgblob",
 				"arguments": "'foo','bar'",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
