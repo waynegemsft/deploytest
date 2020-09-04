@@ -48,21 +48,6 @@
     "functions": [],
     "variables": {},
     "resources": [
-        {
-            "type": "Microsoft.MachineLearningServices/workspaces/codejobs",
-            "name": "[concat(parameters('workspaceName'), '/', parameters('codejobName'))]",
-			"apiVersion": "2020-09-01-preview",
-			"location": "[parameters('location')]",
-			"properties": 
-			{
-				"computeBinding": 
-				{
-					"computeId": "[parameters('computeId')]",
-					"nodeCount": "1"
-				},
-				"Tags": "[parameters('tags')]"
-			}
-        },
 		{
 			"type": "Microsoft.Resources/deploymentScripts",
 			"apiVersion": "2019-10-01-preview",
@@ -90,12 +75,40 @@
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
 			}
+		},
+		{
+			"type": "Microsoft.Resources/deploymentScripts",
+			"apiVersion": "2019-10-01-preview",
+			"name": "runAzureCli",
+			"location": "[resourceGroup().location]",
+			"kind": "AzureCLI",
+			"identity": {
+				"type": "userAssigned",
+				"userAssignedIdentities": {
+				"[parameters('identity')]": {
+				}
+				}
+			},
+			"properties": {
+				"storageAccountSettings":
+				{
+					"storageAccountName": "mnarkdev13644195440",
+					"storageAccountKey": "test"
+				},
+				"forceUpdateTag": "[parameters('utcValue')]",
+				"azCliVersion": "2.0.80",
+				"scriptContent": "result=$(az keyvault list); echo \"arg1 is: $1\"; echo \"arg2 is: $2\"; echo $result | jq -c '{Result: map({id: .id})}' > $AZ_SCRIPTS_OUTPUT_PATH",
+				"arguments": "'foo','bar'",
+				"timeout": "PT30M",
+				"cleanupPreference": "OnSuccess",
+				"retentionInterval": "P1D"
+			}
 		}
     ],
 	"outputs": {
 		"result": {
-		"value": "[reference('runPowerShellInlineWithOutput').outputs.text]",
-		"type": "string"
+		"value": "[reference('runAzureCli').outputs]",
+		"type": "object"
 		}
 	}
 }
