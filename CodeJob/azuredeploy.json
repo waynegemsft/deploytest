@@ -8,6 +8,14 @@
 		},
 		"storageAccountKey": {
 			"type": "string"
+		},
+		"fileUrl": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/waynegetest/deploytest/dev/waynege/dev/BertLarge/Code/train.py"	
+		},
+		"saveFilePath": {
+			"type": "string",
+			"defaultValue": "filepath"
 		}
     },
     "functions": [],
@@ -36,8 +44,8 @@
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
-				"scriptContent": "wget https://raw.githubusercontent.com/waynegetest/deploytest/dev/waynege/dev/BertLarge/Code/train.py; az storage blob upload -f train.py -c test/customerpath/cds --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n wgblob",
-				"arguments": "'foo','bar'",
+				"arguments": "[concat('-fileUrl', ' ', parameters('storageAccountKey'))]",
+				"scriptContent": "wget parameters('fileUrl'); az storage blob upload -f train.py -c parameters('saveFilePath') --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n train.py",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
