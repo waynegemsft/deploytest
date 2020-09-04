@@ -48,36 +48,6 @@
 		{
 			"type": "Microsoft.Resources/deploymentScripts",
 			"apiVersion": "2019-10-01-preview",
-			"name": "runPowerShellInlineWithOutput",
-			"location": "[resourceGroup().location]",
-			"kind": "AzurePowerShell",
-			"identity": {
-				"type": "userAssigned",
-				"userAssignedIdentities": {
-					"/subscriptions/5f08d643-1910-4a38-a7c7-84a39d4f42e0/resourceGroups/mnarkdev/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mnarkuai1": {}
-				}
-			},
-			"properties": {
-				"storageAccountSettings":
-				{
-					"storageAccountName": "mnarkdev13644195440",
-					"storageAccountKey": "SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ=="
-				},
-				"containerSettings": {
-					"containerGroupName": "b"
-				},
-				"forceUpdateTag": "[parameters('utcValue')]",
-				"azPowerShellVersion": "3.0",
-				"scriptContent": "param([string] $name)\n$output = \"Hello {0}\" -f $name\nWrite-Output $output\n$DeploymentScriptOutputs = @{}\n$DeploymentScriptOutputs['text'] = $output",
-				"arguments": "[concat('-codejobName', ' ', parameters('codejobName'))]",
-				"timeout": "PT1H",
-				"cleanupPreference": "OnSuccess",
-				"retentionInterval": "P1D"
-			}
-		},
-		{
-			"type": "Microsoft.Resources/deploymentScripts",
-			"apiVersion": "2019-10-01-preview",
 			"name": "runAzureCli",
 			"location": "[resourceGroup().location]",
 			"kind": "AzureCLI",
@@ -94,7 +64,7 @@
 					"storageAccountKey": "SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ=="
 				},
 				"containerSettings": {
-					"containerGroupName": "a"
+					"containerGroupName": "abcd"
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
