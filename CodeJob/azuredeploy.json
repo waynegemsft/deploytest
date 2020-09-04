@@ -40,6 +40,9 @@
 		"utcValue": {
 			"type": "string",
 			"defaultValue": "[utcNow()]"
+		},
+		"storageAccountKey": {
+			"type": "string"
 		}
     },
     "functions": [],
@@ -61,7 +64,7 @@
 				"storageAccountSettings":
 				{
 					"storageAccountName": "mnarkdev13644195440",
-					"storageAccountKey": "SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ=="
+					"storageAccountKey": "[parameters('storageAccountKey')]"
 				},
 				"containerSettings": {
 					"containerGroupName": "waynegetest"
