@@ -64,7 +64,7 @@
 					"storageAccountKey": "SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ=="
 				},
 				"containerSettings": {
-					"containerGroupName": "mycustomaci-test-container1"
+					"containerGroupName": "b"
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azPowerShellVersion": "3.0",
@@ -94,7 +94,7 @@
 					"storageAccountKey": "SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ=="
 				},
 				"containerSettings": {
-					"containerGroupName": "mycustomaci-test-container2"
+					"containerGroupName": "a"
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
