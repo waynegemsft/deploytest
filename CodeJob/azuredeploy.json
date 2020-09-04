@@ -7,7 +7,7 @@
 			"metadata": {
 				"description": "Specifies the name of the Azure Machine Learning workspace which will hold this datastore target."
 			},
-			"defaultValue": "wgmmstest"
+			"defaultValue": "mnarkdev1"
 		},
 		"codejobName": {
 			"type": "string",
@@ -67,6 +67,9 @@
 					"storageAccountName": "mnarkdev13644195440",
 					"storageAccountKey": "SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ=="
 				},
+				"containerSettings": {
+					"containerGroupName": "wayneaci1"
+				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azPowerShellVersion": "3.0",
 				"scriptContent": "param([string] $name)\n$output = \"Hello {0}\" -f $name\nWrite-Output $output\n$DeploymentScriptOutputs = @{}\n$DeploymentScriptOutputs['text'] = $output",
@@ -94,6 +97,9 @@
 				{
 					"storageAccountName": "mnarkdev13644195440",
 					"storageAccountKey": "SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ=="
+				},
+				"containerSettings": {
+					"containerGroupName": "wayneaci1"
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
