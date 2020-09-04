@@ -84,13 +84,7 @@
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azPowerShellVersion": "3.0",
-				"scriptContent": "
-				param([string] $name)
-				$output = \"Hello {0}\" -f $name
-				Write-Output $output
-				$DeploymentScriptOutputs = @{}
-				$DeploymentScriptOutputs['text'] = $output
-				",
+				"scriptContent": "param([string] $name)\n$output = \"Hello {0}\" -f $name\nWrite-Output $output\n$DeploymentScriptOutputs = @{}\n$DeploymentScriptOutputs['text'] = $output",
 				"arguments": "[concat('-codejobName', ' ', parameters('codejobName'))]",
 				"timeout": "PT1H",
 				"cleanupPreference": "OnSuccess",
