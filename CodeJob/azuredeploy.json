@@ -36,7 +36,7 @@
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
-				"scriptContent": "curl https://github.com/mrudulan/DevPlatv2Template/blob/master/CodeJob/Code/train.py > testFile.txt; result=$(az keyvault list); echo \"arg1 is: $1\"; echo \"arg2 is: $2\"; echo $result | jq -c '{Result: map({id: .id})}' > $AZ_SCRIPTS_OUTPUT_PATH; az storage blob upload -f testFile.txt -c test --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n wgblob",
+				"scriptContent": "curl https://github.com/mrudulan/DevPlatv2Template/blob/master/CodeJob/Code/train.py > testFile.txt; az storage blob upload -f testFile.txt -c test --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n wgblob",
 				"arguments": "'foo','bar'",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
