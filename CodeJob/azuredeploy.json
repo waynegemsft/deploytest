@@ -67,7 +67,7 @@
 					"storageAccountKey": "[parameters('storageAccountKey')]"
 				},
 				"containerSettings": {
-					"containerGroupName": "waynegetest"
+					"containerGroupName": null
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
