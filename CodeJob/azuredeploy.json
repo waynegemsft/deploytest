@@ -55,7 +55,45 @@
 				},
 				"Tags": "[parameters('tags')]"
 			}
-        }
+        },
+		{
+			"type": "Microsoft.Resources/deploymentScripts",
+			"apiVersion": "2019-10-01-preview",
+			"name": "CopyFile",
+			"location": "[resourceGroup().location]",
+			"kind": "AzureCLI", // or "AzureCLI"
+			"identity": {
+				"type": "userAssigned",
+				"userAssignedIdentities": {
+				"/subscriptions/5f08d643-1910-4a38-a7c7-84a39d4f42e0/resourceGroups/mnarkdev/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mnarkuai1": {}
+				}
+			},
+			"properties": {
+				"forceUpdateTag": 1,
+				"containerSettings": {
+				"containerGroupName": "mycustomaci"
+				},
+				"storageAccountSettings": {
+				"storageAccountName": "mnarkdev13644195440",
+				"storageAccountKey": "waynege"
+				},
+				"azCliVersion": "2.0.80",
+				"arguments": "-name \\\"John Dole\\\"",
+				"environmentVariables": [
+				{
+					"name": "someSecret",
+					"secureValue": "if this is really a secret, don't put it here... in plain text..."
+				}
+				],
+				"scriptContent": "
+					az storage blob copy start --account-key waynege --account-name MyAccount --destination-blob wgmmstest4396509565 --destination-container test --source-uri https://github.com/mrudulan/DevPlatv2Template/blob/master/BertLarge/Code/train.py
+				", // or "primaryScriptUri": "https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/deployment-script/deploymentscript-helloworld.ps1",
+				"supportingScriptUris":[],
+				"timeout": "PT30M",
+				"cleanupPreference": "OnSuccess",
+				"retentionInterval": "P1D"
+			}
+			}
     ],
     "outputs": {}
 }
