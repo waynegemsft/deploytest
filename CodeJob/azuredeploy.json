@@ -65,7 +65,7 @@
 				"storageAccountSettings":
 				{
 					"storageAccountName": "mnarkdev13644195440",
-					"storageAccountKey": "test"
+					"storageAccountKey": "SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ=="
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azPowerShellVersion": "3.0",
@@ -93,7 +93,7 @@
 				"storageAccountSettings":
 				{
 					"storageAccountName": "mnarkdev13644195440",
-					"storageAccountKey": "test"
+					"storageAccountKey": "SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ=="
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
