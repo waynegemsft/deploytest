@@ -37,9 +37,6 @@
 				"description": "The location of the Azure Machine Learning Workspace."
 			}
 		},
-		"identity": {
-		"type": "string"
-		},
 		"utcValue": {
 			"type": "string",
 			"defaultValue": "[utcNow()]"
