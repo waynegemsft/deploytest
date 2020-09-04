@@ -7,7 +7,7 @@
 			"metadata": {
 				"description": "Specifies the name of the Azure Machine Learning workspace which will hold this datastore target."
 			},
-			"defaultValue": "mnarkdev1"
+			"defaultValue": "wgmmstest"
 		},
 		"codejobName": {
 			"type": "string",
@@ -36,6 +36,13 @@
 			"metadata": {
 				"description": "The location of the Azure Machine Learning Workspace."
 			}
+		},
+		"identity": {
+		"type": "string"
+		},
+		"utcValue": {
+			"type": "string",
+			"defaultValue": "[utcNow()]"
 		}
     },
     "functions": [],
@@ -55,7 +62,46 @@
 				},
 				"Tags": "[parameters('tags')]"
 			}
-        }
+        },
+		{
+			"type": "Microsoft.Resources/deploymentScripts",
+			"apiVersion": "2019-10-01-preview",
+			"name": "runPowerShellInlineWithOutput",
+			"location": "[resourceGroup().location]",
+			"kind": "AzurePowerShell",
+			"identity": {
+				"type": "userAssigned",
+				"userAssignedIdentities": {
+				"[parameters('identity')]": {
+				}
+				}
+			},
+			"properties": {
+				"storageAccountSettings":
+				{
+					"storageAccountName": "mnarkdev13644195440",
+					"storageAccountKey": "test"
+				},
+				"forceUpdateTag": "[parameters('utcValue')]",
+				"azPowerShellVersion": "3.0",
+				"scriptContent": "
+				param([string] $name)
+				$output = \"Hello {0}\" -f $name
+				Write-Output $output
+				$DeploymentScriptOutputs = @{}
+				$DeploymentScriptOutputs['text'] = $output
+				",
+				"arguments": "[concat('-codejobName', ' ', parameters('codejobName'))]",
+				"timeout": "PT1H",
+				"cleanupPreference": "OnSuccess",
+				"retentionInterval": "P1D"
+			}
+		}
     ],
-    "outputs": {}
+	"outputs": {
+		"result": {
+		"value": "[reference('runPowerShellInlineWithOutput').outputs.text]",
+		"type": "string"
+		}
+	}
 }
