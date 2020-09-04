@@ -36,6 +36,13 @@
 			"metadata": {
 				"description": "The location of the Azure Machine Learning Workspace."
 			}
+		},
+		"identity": {
+		"type": "string"
+		},
+		"utcValue": {
+			"type": "string",
+			"defaultValue": "[utcNow()]"
 		}
     },
     "functions": [],
@@ -59,41 +66,42 @@
 		{
 			"type": "Microsoft.Resources/deploymentScripts",
 			"apiVersion": "2019-10-01-preview",
-			"name": "CopyFile",
+			"name": "runPowerShellInlineWithOutput",
 			"location": "[resourceGroup().location]",
-			"kind": "AzureCLI", // or "AzureCLI"
+			"kind": "AzurePowerShell",
 			"identity": {
 				"type": "userAssigned",
 				"userAssignedIdentities": {
-				"/subscriptions/5f08d643-1910-4a38-a7c7-84a39d4f42e0/resourceGroups/mnarkdev/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mnarkuai1": {}
+				"[parameters('identity')]": {
+				}
 				}
 			},
 			"properties": {
-				"forceUpdateTag": 1,
-				"containerSettings": {
-					"containerGroupName": "mycustomaci"
-				},
-				"storageAccountSettings": {
-					"storageAccountName": "mnarkdev13644195440",
-					"storageAccountKey": "waynege"
-				},
-				"azCliVersion": "2.0.80",
-				"arguments": "-name \\\"John Dole\\\"",
-				"environmentVariables": [
+				"storageAccountSettings":
 				{
-					"name": "someSecret",
-					"secureValue": "if this is really a secret, don't put it here... in plain text..."
-				}
-				],
+					"storageAccountName": "mnarkdev13644195440",
+					"storageAccountKey": "test"
+				},
+				"forceUpdateTag": "[parameters('utcValue')]",
+				"azPowerShellVersion": "3.0",
 				"scriptContent": "
-					az storage blob copy start --account-key waynege --account-name MyAccount --destination-blob mnarkdev13644195440 --destination-container test --source-uri https://github.com/mrudulan/DevPlatv2Template/blob/master/BertLarge/Code/train.py
-				", // or "primaryScriptUri": "https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/deployment-script/deploymentscript-helloworld.ps1",
-				"supportingScriptUris":[],
-				"timeout": "PT30M",
+				param([string] $name)
+				$output = \"Hello {0}\" -f $name
+				Write-Output $output
+				$DeploymentScriptOutputs = @{}
+				$DeploymentScriptOutputs['text'] = $output
+				",
+				"arguments": "[concat('-codejobName', ' ', parameters('codejobName'))]",
+				"timeout": "PT1H",
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
 			}
 		}
     ],
-    "outputs": {}
+	"outputs": {
+		"result": {
+		"value": "[reference('runPowerShellInlineWithOutput').outputs.text]",
+		"type": "string"
+		}
+	}
 }
