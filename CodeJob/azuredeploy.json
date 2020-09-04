@@ -64,7 +64,7 @@
 					"storageAccountKey": "SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ=="
 				},
 				"containerSettings": {
-					"containerGroupName": "abcd"
+					"containerGroupName": "waynegetest"
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
