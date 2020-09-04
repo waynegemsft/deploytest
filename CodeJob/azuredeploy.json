@@ -44,7 +44,7 @@
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
-				"arguments": "[concat('-fileUrl {0}', parameters('fileUrl'))]",
+				"arguments": "[reference('-fileUrl {0}', parameters('fileUrl'))]",
 				"scriptContent": "wget $fileUrl; az storage blob upload -f train.py -c filepath --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n train.py",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
