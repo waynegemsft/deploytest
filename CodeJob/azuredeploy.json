@@ -33,6 +33,13 @@
 					"/subscriptions/5f08d643-1910-4a38-a7c7-84a39d4f42e0/resourceGroups/mnarkdev/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mnarkuai1": {}
 				}
 			},
+			"saveFilePath": {
+				"type": "string",
+				"defaultValue": "filepath"
+			},
+			"dependsOn": [
+				"[parameters('saveFilePath')]"
+			],
 			"properties": {
 				"storageAccountSettings":
 				{
@@ -44,8 +51,8 @@
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
-				"arguments": "[parameters('fileUrl')]",
-				"scriptContent": "wget https://raw.githubusercontent.com/waynegetest/deploytest/dev/waynege/dev/BertLarge/Code/train.py; az storage blob upload -f train.py -c waynegetest --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n train.py",
+				"arguments": "[parameters('saveFilePath')]",
+				"scriptContent": "wget $1; az storage blob upload -f train.py -c waynegetest --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n train.py",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
