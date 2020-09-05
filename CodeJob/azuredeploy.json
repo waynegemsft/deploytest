@@ -45,7 +45,7 @@
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
 				"arguments": "[parameters('fileUrl')]",
-				"scriptContent": "wget $1; az storage blob upload -f train.py -c /filepath --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n train.py",
+				"scriptContent": "wget https://raw.githubusercontent.com/waynegetest/deploytest/dev/waynege/dev/BertLarge/Code/train.py; az storage blob upload -f train.py -c waynegetest --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n train.py",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
