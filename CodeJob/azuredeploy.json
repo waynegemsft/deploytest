@@ -33,10 +33,6 @@
 					"/subscriptions/5f08d643-1910-4a38-a7c7-84a39d4f42e0/resourceGroups/mnarkdev/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mnarkuai1": {}
 				}
 			},
-			"saveFilePath": {
-				"type": "string",
-				"defaultValue": "filepath"
-			},
 			"dependsOn": [
 				"[parameters('saveFilePath')]"
 			],
