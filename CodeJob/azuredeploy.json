@@ -24,7 +24,7 @@
 		{
 			"type": "Microsoft.Resources/deploymentScripts",
 			"apiVersion": "2019-10-01-preview",
-			"name": "runAzureCli",
+			"name": "UploadFileToBlob",
 			"location": "[resourceGroup().location]",
 			"kind": "AzureCLI",
 			"identity": {
@@ -54,7 +54,7 @@
     ],
 	"outputs": {
 		"result": {
-		"value": "[reference('runAzureCli').outputs]",
+		"value": "[reference('UploadFileToBlob').outputs]",
 		"type": "object"
 		}
 	}
