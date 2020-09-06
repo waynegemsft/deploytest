@@ -12,6 +12,10 @@
 		"fileUrl": {
 			"type": "string",
 			"defaultValue": "https://raw.githubusercontent.com/waynegetest/deploytest/dev/waynege/dev/BertLarge/Code/train.py"	
+		},
+		"saveFileToPath": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/waynegetest/deploytest/dev/waynege/dev/BertLarge/Code/train.py"	
 		}
     },
     "functions": [],
@@ -40,8 +44,8 @@
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
-				"arguments": "[parameters('fileUrl')]",
-				"scriptContent": "wget $1; az storage blob upload -f train.py -c waynegetest --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n train.py",
+				"arguments": "[concat(parameters('fileUrl'), parameters('saveFileToPath'))]",
+				"scriptContent": "wget $1; az storage blob upload -f train.py -c $2 --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n train.py",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
