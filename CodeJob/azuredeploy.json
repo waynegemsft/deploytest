@@ -23,7 +23,7 @@
 		},
 		"saveFileToPath": {
 			"type": "string",
-			"defaultValue": "newfilepath1"	
+			"defaultValue": "test"	
 		}
     },
     "functions": [],
