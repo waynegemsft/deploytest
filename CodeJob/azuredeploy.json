@@ -6,8 +6,16 @@
 			"type": "string",
 			"defaultValue": "[utcNow()]"
 		},
+		"storageAccountName": {
+			"type": "string",
+			"defaultValue": "mnarkdev13644195440"
+		},
 		"storageAccountKey": {
 			"type": "string"
+		},
+		"userAssignedIdentities": {
+			"type": "string",
+			"defaultValue": "/subscriptions/5f08d643-1910-4a38-a7c7-84a39d4f42e0/resourceGroups/mnarkdev/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mnarkuai1"
 		},
 		"fileUrl": {
 			"type": "string",
@@ -30,13 +38,13 @@
 			"identity": {
 				"type": "userAssigned",
 				"userAssignedIdentities": {
-					"/subscriptions/5f08d643-1910-4a38-a7c7-84a39d4f42e0/resourceGroups/mnarkdev/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mnarkuai1": {}
+					"[parameters('userAssignedIdentities')]": {}
 				}
 			},
 			"properties": {
 				"storageAccountSettings":
 				{
-					"storageAccountName": "mnarkdev13644195440",
+					"storageAccountName": "[parameters('storageAccountName')]",
 					"storageAccountKey": "[parameters('storageAccountKey')]"
 				},
 				"containerSettings": {
@@ -44,8 +52,8 @@
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
-				"arguments": "[concat(parameters('fileUrl'), ' ', parameters('saveFileToPath'))]",
-				"scriptContent": "wget $1; az storage blob upload -f train.py -c $2 --account-key SQsvshyiaJxR8lrDZEzxmmcUpTlqCfSFIp1Rwhob4FgioFLeutEAZttrJ+sAlfWaC3b6jRisFt3yMZoJx7kfeQ== --account-name mnarkdev13644195440 -n train.py",
+				"arguments": "[concat(parameters('fileUrl'), ' ', parameters('saveFileToPath'), parameters('storageAccountName'), parameters('storageAccountKey'))]",
+				"scriptContent": "wget $1; az storage blob upload -f train.py -c $2 --account-name $3 --account-key $4  -n train.py",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
@@ -54,7 +62,7 @@
     ],
 	"outputs": {
 		"result": {
-		"value": "[reference('UploadFileToBlob').outputs]",
+		"value": "[reference('UploadFileToBlob')]",
 		"type": "object"
 		}
 	}
