@@ -23,7 +23,7 @@
 		},
 		"saveFileToPath": {
 			"type": "string",
-			"defaultValue": "https://raw.githubusercontent.com/waynegetest/deploytest/dev/waynege/dev/BertLarge/Code/train.py"	
+			"defaultValue": "newfilepath1"	
 		}
     },
     "functions": [],
