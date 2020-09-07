@@ -53,7 +53,7 @@
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
 				"arguments": "[concat(parameters('fileUrl'), ' ', parameters('saveFileToPath'), ' ', parameters('storageAccountName'), ' ', parameters('storageAccountKey'))]",
-				"scriptContent": "wget $1; az storage blob upload -f train.py -c $2 --account-name $3 --account-key $4  -n train.py",
+				"scriptContent": "wget $1; downloadfilename='$(basename $1)'; az storage blob upload -f $downloadfilename -c $2 --account-name $3 --account-key $4  -n $downloadfilename",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
