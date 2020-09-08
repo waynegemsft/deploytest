@@ -1,0 +1,69 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+		"utcValue": {
+			"type": "string",
+			"defaultValue": "[utcNow()]"
+		},
+		"storageAccountName": {
+			"type": "string",
+			"defaultValue": "mnarkdev13644195440"
+		},
+		"storageAccountKey": {
+			"type": "string"
+		},
+		"userAssignedIdentities": {
+			"type": "string",
+			"defaultValue": "/subscriptions/5f08d643-1910-4a38-a7c7-84a39d4f42e0/resourceGroups/mnarkdev/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mnarkuai1"
+		},
+		"fileUrl": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com/waynegetest/deploytest/dev/waynege/dev/BertLarge/Code/train.py"	
+		},
+		"saveFileToPath": {
+			"type": "string",
+			"defaultValue": "test"	
+		}
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+		{
+			"type": "Microsoft.Resources/deploymentScripts",
+			"apiVersion": "2019-10-01-preview",
+			"name": "UploadFileToBlob",
+			"location": "[resourceGroup().location]",
+			"kind": "AzureCLI",
+			"identity": {
+				"type": "userAssigned",
+				"userAssignedIdentities": {
+					"[parameters('userAssignedIdentities')]": {}
+				}
+			},
+			"properties": {
+				"storageAccountSettings":
+				{
+					"storageAccountName": "[parameters('storageAccountName')]",
+					"storageAccountKey": "[parameters('storageAccountKey')]"
+				},
+				"containerSettings": {
+					"containerGroupName": null
+				},
+				"forceUpdateTag": "[parameters('utcValue')]",
+				"azCliVersion": "2.0.80",
+				"arguments": "[concat(parameters('fileUrl'), ' ', parameters('saveFileToPath'), ' ', parameters('storageAccountName'), ' ', parameters('storageAccountKey'))]",
+				"scriptContent": "wget $1; downloadfilename=$(basename $1); az storage blob upload -f $downloadfilename -c $2 --account-name $3 --account-key $4  -n $downloadfilename",
+				"timeout": "PT30M",
+				"cleanupPreference": "OnSuccess",
+				"retentionInterval": "P1D"
+			}
+		}
+    ],
+	"outputs": {
+		"result": {
+		"value": "[reference('UploadFileToBlob')]",
+		"type": "object"
+		}
+	}
+}
