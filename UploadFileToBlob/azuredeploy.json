@@ -10,9 +10,6 @@
 			"type": "string",
 			"defaultValue": "mnarkdev13644195440"
 		},
-		"storageAccountKey": {
-			"type": "string"
-		},
 		"userAssignedIdentities": {
 			"type": "string",
 			"defaultValue": "/subscriptions/5f08d643-1910-4a38-a7c7-84a39d4f42e0/resourceGroups/mnarkdev/providers/Microsoft.ManagedIdentity/userAssignedIdentities/mnarkuai1"
@@ -42,17 +39,12 @@
 				}
 			},
 			"properties": {
-				"storageAccountSettings":
-				{
-					"storageAccountName": "[parameters('storageAccountName')]",
-					"storageAccountKey": "[parameters('storageAccountKey')]"
-				},
 				"containerSettings": {
 					"containerGroupName": null
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
-				"arguments": "[concat(parameters('fileUrl'), ' ', parameters('saveFileToPath'), ' ', parameters('storageAccountName'), ' ', parameters('storageAccountKey'))]",
+				"arguments": "[concat(parameters('fileUrl'), ' ', parameters('saveFileToPath'), ' ', parameters('storageAccountName'))]",
 				"scriptContent": "wget $1; downloadfilename=$(basename $1); az storage blob upload -f $downloadfilename -c $2 --account-name $3 -n $downloadfilename",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
