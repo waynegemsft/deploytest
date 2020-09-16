@@ -24,7 +24,9 @@
 		}
     },
     "functions": [],
-    "variables": {},
+    "variables": {
+		"storageUrl" : "[concat('http://', parameters('storageAccountName'), '.blob.core.windows.net',  '/', parameters('saveFileToPath'), '/', last(split(parameters('fileUrl'), '/')))]"
+	},
     "resources": [
 		{
 			"type": "Microsoft.Resources/deploymentScripts",
@@ -44,33 +46,8 @@
 				},
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
-				"arguments": "[concat(parameters('fileUrl'), ' ', parameters('saveFileToPath'), ' ', parameters('storageAccountName'))]",
-				"scriptContent": "wget $1; downloadfilename=$(basename $1); az storage blob upload -f $downloadfilename -c $2 --account-name $3 -n $downloadfilename; firstPart='https://'; secondPart='.blob.core.windows.net/'; thirdPart='/'; result=$firstPart$3$secondPart$2$thirdPart$downloadfilename; echo $result",
-				"timeout": "PT30M",
-				"cleanupPreference": "OnSuccess",
-				"retentionInterval": "P1D"
-			}
-		},
-		{
-			"type": "Microsoft.Resources/deploymentScripts",
-			"apiVersion": "2019-10-01-preview",
-			"name": "Test",
-			"location": "[resourceGroup().location]",
-			"kind": "AzureCLI",
-			"identity": {
-				"type": "userAssigned",
-				"userAssignedIdentities": {
-					"[parameters('userAssignedIdentities')]": {}
-				}
-			},
-			"properties": {
-				"containerSettings": {
-					"containerGroupName": null
-				},
-				"forceUpdateTag": "[parameters('utcValue')]",
-				"azCliVersion": "2.0.80",
-				"arguments": "[concat(reference('UploadFileToBlob').outputs)]",
-				"scriptContent": "echo $1",
+				"arguments": "[concat(parameters('fileUrl'), ' ', parameters('saveFileToPath'), ' ', parameters('storageAccountName'), ' ', variables('storageUrl'))]",
+				"scriptContent": "wget $1; downloadfilename=$(basename $1); az storage blob upload -f $downloadfilename -c $2 --account-name $3 -n $downloadfilename; echo $4",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
