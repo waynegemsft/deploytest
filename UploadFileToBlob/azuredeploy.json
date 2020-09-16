@@ -45,7 +45,7 @@
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
 				"arguments": "[concat(parameters('fileUrl'), ' ', parameters('saveFileToPath'), ' ', parameters('storageAccountName'))]",
-				"scriptContent": "wget $1; downloadfilename=$(basename $1); az storage blob upload -f $downloadfilename -c $2 --account-name $3 -n $downloadfilename; result='https://${3}.blob.core.windows.net/${2}/$downloadfilename'; echo $result",
+				"scriptContent": "wget $1; downloadfilename=$(basename $1); az storage blob upload -f $downloadfilename -c $2 --account-name $3 -n $downloadfilename; firstPart='https://'; secondPart='.blob.core.windows.net/'; thirdPart='/'; result='$firstPart${3}$secondPart${2}$thirdPart$downloadfilename'; echo $result",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
