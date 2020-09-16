@@ -1,7 +1,7 @@
 # DevPlatv2 Templates
 
 Here are few quick start templates for dev plat v2 work
-
+Test
 ### Bert Large training
 
 [![UploadFileToBlob](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fwaynegemsft%2Fdeploytest%2Fdev%2Fwaynege%2Fdev%2FUploadFileToBlob%2Fazuredeploy.json)
