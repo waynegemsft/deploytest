@@ -45,7 +45,7 @@
 				"forceUpdateTag": "[parameters('utcValue')]",
 				"azCliVersion": "2.0.80",
 				"arguments": "[concat(parameters('fileUrl'), ' ', parameters('saveFileToPath'), ' ', parameters('storageAccountName'))]",
-				"scriptContent": "wget $1; downloadfilename=$(basename $1); az storage blob upload -f $downloadfilename -c $2 --account-name $3 -n $downloadfilename; storageName=$(az storage account check-name --name); echo $storageName",
+				"scriptContent": "wget $1; downloadfilename=$(basename $1); az storage blob upload -f $downloadfilename -c $2 --account-name $3 -n $downloadfilename; storageName=$(az storage account check-name --name); echo $storageName | jq -c '{Result: map({id: .id})}' > $AZ_SCRIPTS_OUTPUT_PATH",
 				"timeout": "PT30M",
 				"cleanupPreference": "OnSuccess",
 				"retentionInterval": "P1D"
@@ -54,7 +54,7 @@
     ],
 	"outputs": {
 		"result": {
-		"value": "[reference('UploadFileToBlob')]",
+		"value": "[reference('UploadFileToBlob').outputs]",
 		"type": "object"
 		}
 	}
